@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Menu Item</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/delete_menu_item.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Menu Item</h1>
+        <p>Are you sure you want to delete "{{ item.name }}"?</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Delete</button>
+        </form>
+    </div>
+</body>
+</html>

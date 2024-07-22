@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/signup.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                <div class="error">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit">Sign Up</button>
+        </form>
+        <nav>
+            <ul>
+                <li><a href="{% url 'login' %}"><u>Back to Login</u></a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

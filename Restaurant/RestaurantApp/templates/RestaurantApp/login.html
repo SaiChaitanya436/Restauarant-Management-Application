@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/login.css' %}">
+    </head>
+    <body>
+        <header class="header-container">
+            <h1>Login</h1>
+        </header>
+
+        <main>
+            <div class="form-container">
+                <form method="post">
+                    {% csrf_token %}
+                    <div>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required placeholder="Enter Username">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter Password">
+                    </div>
+                    <button type="submit">Login</button>
+                    &emsp;
+                    <div class="signup-container">
+                        <label>New User?</label>
+                        <a href="{% url 'signup' %}"><u>Sign Up</u></a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

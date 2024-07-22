@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Restaurant App</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/base.css' %}">
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <nav>
+                    <ul>
+                        <li class="logout"> 
+                            {% if user.is_authenticated %}
+                                <a href="/logout/" class="nav-link">Logout</a>
+                            {% else %}
+                                <a href="/login/" class="nav-link">Login</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <h2 class="user-info">Welcome, {{ user.username }}</h2>
+            <div class="main-content">
+                <h2>Main Content Area</h2>
+                <p>Welcome to our restaurant app. Here you can create orders, view the menu, and check your order history.</p>
+                <a href="/cart/" class="btn">View Cart</a>
+                <a href="/menu/" class="btn">View Menu</a>
+                <a href="/orders/" class="btn">Order History</a>
+            </div>
+        </main>
+    </body>
+</html>

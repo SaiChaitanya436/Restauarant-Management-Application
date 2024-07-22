@@ -1,0 +1,55 @@
+
+{%load static%}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Order History</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/order_history.css' %}">
+        <header>
+            <div class="header-container">
+                <nav>
+                    <ul>
+                        <li><a href="/" class="nav-link">Home Page</a></li>
+                        <li><a href="/menu/" class="nav-link">Menu</a></li>
+                    </ul>
+                </nav>
+                <h1>Order History</h1>
+            </div>
+        </header>
+    </head>
+    <body>
+        <h1>Order History</h1>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Order Date</th>
+                    <th>Total Amount</th>
+                    <!-- Add more headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>{{ order.total_amount }}</td>
+                    <!-- Add more cells as needed -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if user.username == 'Sai_Chaitanya' %}
+        <div class="button-container">
+            <form action="{% url 'clear_order_history' %}" method="post">
+                {% csrf_token %}</br>
+                <button type="submit">Clear All Orders</button>
+                <center><a href="{% url 'print_order_history' %}" class="btn">Print History Of All Customers</a></center>
+            </form>
+        </div>
+        {%endif%}
+    </body>
+</html>

@@ -1,0 +1,82 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <header>
+            <div class="header-container">
+                <nav>
+                    <ul style="color: white;">
+                        <li><a href="/" class="nav-link">Back</a></li>
+                        <li><a href="/orders/" class="nav-link">View Your Order History</a></li>
+                        <li><a href="/menu/" class="nav-link">Go Back To Menu</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <meta charset="UTF-8">
+        <title>Cart</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/cart.css' %}">
+    </head>
+    <body>
+        <h1 align="center">Cart</h1>
+        {% if cart.menu_items.count > 0 %}
+            <ul>
+                {% for item in cart.menu_items.all %}
+                    <li>{{ item.name }} - Rs {{ item.price }} 
+                        <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="total-amount">Total Amount: Rs {{ cart.total_amount }}</p>
+            <a href="{% url 'confirm_order' %}" class="confirm-order">Confirm Order</a>
+        {% else %}
+            <p class="empty-cart">Your cart is empty</p>
+        {% endif %}
+    </body>
+</html> {% endcomment %}
+
+
+<!-- RestaurantApp/templates/RestaurantApp/cart.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <header>
+        <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/cart.css' %}">
+        <div class="header-container">
+            <nav>
+                <ul style="color: white;">
+                    <li><a href="/" class="nav-link">Back Home</a></li>
+                    <li><a href="/menu/" class="nav-link">Go Back To Menu</a></li>
+                    <li><a href="/orders/" class="nav-link">View Your Order History</a></li>    
+                </ul>
+            </nav>
+        </div>
+    </header>
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+    </header>
+    <main>
+        <div class="main-content">
+            {% if cart.cart_items.count > 0 %}
+                <ul>
+                    {% for cart_item in cart.cart_items.all %}
+                        <li>{{ cart_item.menu_item.name }} - Rs {{ cart_item.menu_item.price }} 
+                            (Quantity: {{ cart_item.quantity }})
+                            <a href="{% url 'remove_from_cart' cart_item.menu_item.id %}">Remove</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p class="total-amount">Total Amount: Rs {{ cart.total_amount }}</p>
+                <a href="{% url 'confirm_order' %}" class="confirm-order">Confirm Order</a>
+            {% else %}
+                <p class="empty-cart">Your cart is empty</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

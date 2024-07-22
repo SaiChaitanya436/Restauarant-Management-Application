@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset='utf-8' />
+        <title>Menu Section</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="{% static 'RestaurantApp/css/menu.css' %}">
+    <body>
+        <header>
+            <div class="header-container">
+                <nav>
+                    <ul>
+                        &emsp;&emsp;
+                        <li><a href="/" class="nav-link">Back</a></li>
+                        &emsp;&emsp;
+                        <li><a href="/cart/" class="nav-link">Go To Cart Page</a></li>
+                        &emsp;&emsp;
+                        <li><a href="/orders/" class="nav-link">Order History</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <h2 align="center">List Of Menu Items Available</h2>
+        <main>
+            <table border="2">
+                <thead>
+                    <tr>
+                        {% if user.username == 'Sai_Chaitanya' %}
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Delete Item</th>
+                            <th>Update Item</th>
+                            <th>Add Item To Cart</th>
+                        {%else%}
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Add Item To Cart</th>
+                        {%endif%}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in menu_items %}
+                    <tr>
+                        {% if user.username == 'Sai_Chaitanya' %}
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>Rs {{ item.price }}</td>
+                            <td><a href="{% url 'delete_menu_item' item.pk %}">Delete</a></td>
+                            <td><a href="{% url 'update_menu_item' item.pk %}">Update</a></td>
+                            <td><a href="{% url 'add_to_cart' item.pk %}">Place Your Order</a></td>
+                        {%else%}
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>Rs {{ item.price }}</td>
+                            <td><a href="{% url 'add_to_cart' item.pk %}">Place Your Order</a></td>
+                        {%endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <br>
+        {% if user.username == 'Sai_Chaitanya' %}<center><a href="/add_item/">Add Item To Menu</a></center>{%endif%}
+    </body>
+</html>
