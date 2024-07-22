@@ -1,6 +1,11 @@
 # Restauarant-Management-Application
 This is a Restaurant Management Application built using Python-Django.
 
+
+https://github.com/user-attachments/assets/e2f07e91-ffbb-4f89-8a1f-3a175250dfc3
+
+
+
 ## Features
 
 - User authentication (Sign up, Log in, Log out)
